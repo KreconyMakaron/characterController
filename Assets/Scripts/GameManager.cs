@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,9 +9,17 @@ public class GameManager : MonoBehaviour
     public static GameManager gameManager;
     public int timeToEnd;
 	public Text txt;
+
+    public void AddKey(KeyColor color)
+    {
+        throw new NotImplementedException();
+    }
+
     bool gamePaused = false;
     bool endGame = false;
     bool win = false;
+
+    public int points = 0;
 
     void Start()
     {
@@ -27,6 +36,16 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("Time: " + timeToEnd + " s");
         InvokeRepeating("Stopper", 2, 1);
+    }
+
+    public void AddPoints(int points)
+    {
+        this.points += points;
+    }
+
+    internal void AddTime(int time)
+    {
+        timeToEnd += time;
     }
 
     void Update()
