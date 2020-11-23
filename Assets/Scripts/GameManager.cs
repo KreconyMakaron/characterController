@@ -8,11 +8,33 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager gameManager;
     public int timeToEnd;
-	public Text txt;
+
+    internal void FreezeTime(int freezeTime)
+    {
+        CancelInvoke("Stopper");
+        InvokeRepeating("Stopper", freezeTime, 1);
+    }
+
+    public Text txt;
+
+    public int redkey = 0;
+    public int greenkey = 0;
+    public int goldkey = 0;
 
     public void AddKey(KeyColor color)
     {
-        throw new NotImplementedException();
+        if (color == KeyColor.Gold)
+        {
+            goldkey++;
+        }
+        else if (color == KeyColor.Green)
+        {
+            greenkey++;
+        }
+        else if (color == KeyColor.Red)
+        {
+            redkey++;
+        }
     }
 
     bool gamePaused = false;
@@ -61,6 +83,11 @@ public class GameManager : MonoBehaviour
             {
                 PauseGame();
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Debug.Log("Time: " + timeToEnd + ", Rk:" + redkey + ", Gk:" + greenkey + ", Glk:" + goldkey + ", points:" + points);
         }
     }
 
